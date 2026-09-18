@@ -1,0 +1,94 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum FitnessGoal {
+  FAT_LOSS
+  MUSCLE_HYPERTROPHY
+  STRENGTH_POWER
+  ENDURANCE
+  ATHLETIC_PERFORMANCE
+}
+
+enum FitnessLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  ELITE
+}
+
+model User {
+  id              String         @id @default(uuid())
+  email           String         @unique
+  username        String         @unique
+  fullName        String
+  avatarUrl       String?
+  heightCm        Float
+  weightKg        Float
+  targetWeightKg  Float
+  goal            FitnessGoal    @default(MUSCLE_HYPERTROPHY)
+  fitnessLevel    FitnessLevel   @default(INTERMEDIATE)
+  dailyCalorieTarget Int         @default(2400)
+  proteinGramsTarget Int         @default(160)
+  carbsGramsTarget   Int         @default(240)
+  fatsGramsTarget    Int         @default(70)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  workouts        WorkoutLog[]
+  nutritionLogs   NutritionLog[]
+  socialPosts     SocialPost[]
+  biometrics      BiometricMetric[]
+}
+
+model WorkoutLog {
+  id              String         @id @default(uuid())
+  userId          String
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  category        String
+  durationMinutes Int
+  caloriesBurned  Int
+  perceivedEffort Int            @default(7) // 1-10 RPE
+  exercises       Json           // Array of exercises, sets, reps, weight
+  completedAt     DateTime       @default(now())
+}
+
+model NutritionLog {
+  id              String         @id @default(uuid())
+  userId          String
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mealType        String         // BREAKFAST, LUNCH, DINNER, SNACK
+  name            String
+  calories        Int
+  proteinGrams    Float
+  carbsGrams      Float
+  fatsGrams       Float
+  loggedAt        DateTime       @default(now())
+}
+
+model BiometricMetric {
+  id              String         @id @default(uuid())
+  userId          String
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restingHeartRate Int?
+  heartRateVariability Float?
+  sleepHours      Float?
+  recoveryScore   Int?           // 0-100%
+  recordedDate    DateTime       @default(now())
+}
+
+model SocialPost {
+  id              String         @id @default(uuid())
+  userId          String
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content         String
+  badgeEarned     String?
+  likesCount      Int            @default(0)
+  createdAt       DateTime       @default(now())
+}

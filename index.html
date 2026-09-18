@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitFlow Redesign — Next-Gen AI Fitness & Architecture Platform</title>
+  <meta name="description" content="State-of-the-art AI fitness companion, smart nutrition tracker, live voice coach, and system architecture explorer." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-theme">
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo">
+          <i data-lucide="zap" class="logo-icon"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">FITFLOW</span>
+          <span class="brand-badge">REDESIGN</span>
+        </div>
+      </div>
+
+      <div class="athlete-mini-card">
+        <div class="avatar-wrapper">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160&auto=format&fit=crop&q=80" alt="Athlete Avatar" id="userAvatarImg" class="athlete-avatar" />
+          <div class="online-indicator"></div>
+        </div>
+        <div class="athlete-info">
+          <h4 id="userDisplayName">Jordan Sterling</h4>
+          <span class="athlete-status" id="userGoalTag">🔥 Hypertrophy Pro</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="dashboard">
+          <i data-lucide="layout-grid"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-tab="workout">
+          <i data-lucide="flame"></i>
+          <span>Active Trainer</span>
+          <span class="pulse-tag">LIVE</span>
+        </button>
+        <button class="nav-item" data-tab="nutrition">
+          <i data-lucide="apple"></i>
+          <span>Smart Nutrition</span>
+        </button>
+        <button class="nav-item" data-tab="ai-coach">
+          <i data-lucide="bot"></i>
+          <span>AI Microservice</span>
+        </button>
+        <button class="nav-item" data-tab="analytics">
+          <i data-lucide="bar-chart-2"></i>
+          <span>Biometrics & PRs</span>
+        </button>
+        <button class="nav-item" data-tab="social">
+          <i data-lucide="users"></i>
+          <span>Community Feed</span>
+        </button>
+        <button class="nav-item" data-tab="architecture">
+          <i data-lucide="cpu"></i>
+          <span>System Architecture</span>
+          <span class="arch-badge">DOCS</span>
+        </button>
+        <button class="nav-item" data-tab="settings">
+          <i data-lucide="sliders"></i>
+          <span>Custom Profile</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="readiness-box">
+          <div class="readiness-header">
+            <span>Daily Recovery</span>
+            <strong class="text-emerald" id="recoveryScoreDisplay">94%</strong>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 94%;"></div>
+          </div>
+          <span class="readiness-sub">Optimal for Heavy Resistance</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Navbar -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobileMenuToggle">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="page-title-group">
+            <h1 id="pageHeading">Athlete Overview</h1>
+            <p id="pageSubheading">Today is Friday • High Energy Micro-Cycle</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="header-stat-pill">
+            <i data-lucide="flame" class="text-amber"></i>
+            <span>Streak: <strong id="streakCount">14 Days</strong></span>
+          </div>
+
+          <div class="header-stat-pill">
+            <i data-lucide="droplet" class="text-cyan"></i>
+            <span id="quickWaterDisplay">2.25 / 3.5 L</span>
+            <button class="quick-water-btn" id="quickAddWaterBtn" title="Log 250ml Water">+250ml</button>
+          </div>
+
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Lighting Mode">
+            <i data-lucide="sun" id="themeIcon"></i>
+          </button>
+
+          <button class="voice-audio-btn active" id="audioToggleBtn" title="Voice Coach Synthesizer">
+            <i data-lucide="volume-2" id="voiceIcon"></i>
+            <span class="voice-status">Voice ON</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- TAB 1: DASHBOARD -->
+      <section class="tab-pane active" id="tab-dashboard">
+        <!-- Metric Cards Grid -->
+        <div class="metrics-grid">
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bg emerald">
+              <i data-lucide="activity"></i>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Calories Burned</span>
+              <div class="metric-value-row">
+                <span class="metric-number" id="dashCalories">580</span>
+                <span class="metric-unit">kcal</span>
+              </div>
+              <span class="metric-delta text-emerald"><i data-lucide="trending-up"></i> +14% vs avg</span>
+            </div>
+          </div>
+
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bg cyan">
+              <i data-lucide="timer"></i>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Training Duration</span>
+              <div class="metric-value-row">
+                <span class="metric-number">52</span>
+                <span class="metric-unit">mins</span>
+              </div>
+              <span class="metric-delta text-cyan"><i data-lucide="check-circle-2"></i> Goal Hit (45m)</span>
+            </div>
+          </div>
+
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bg purple">
+              <i data-lucide="dumbbell"></i>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Volume Load</span>
+              <div class="metric-value-row">
+                <span class="metric-number" id="dashVolume">16,420</span>
+                <span class="metric-unit">kg</span>
+              </div>
+              <span class="metric-delta text-purple"><i data-lucide="award"></i> Personal Record</span>
+            </div>
+          </div>
+
+          <div class="glass-card metric-card">
+            <div class="metric-icon-bg amber">
+              <i data-lucide="heart"></i>
+            </div>
+            <div class="metric-body">
+              <span class="metric-label">Avg Heart Rate</span>
+              <div class="metric-value-row">
+                <span class="metric-number">138</span>
+                <span class="metric-unit">bpm</span>
+              </div>
+              <span class="metric-delta text-amber"><i data-lucide="shield-check"></i> Zone 3 Aerobic</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Hero: Today's Workout & Macro Rings -->
+        <div class="dashboard-split-grid">
+          <!-- Active Scheduled Program -->
+          <div class="glass-card featured-workout-card">
+            <div class="card-header-flex">
+              <div>
+                <span class="card-tag">TODAY'S AI PRESCRIPTION</span>
+                <h3>Hypertrophy Alpha: Chest & Deltoid Blitz</h3>
+              </div>
+              <span class="badge-difficulty">Advanced • 48m</span>
+            </div>
+
+            <p class="card-desc">Targeted progressive mechanical tension with 3-second eccentric focus and peak isometric squeeze.</p>
+
+            <div class="workout-exercise-preview-list">
+              <div class="preview-item">
+                <div class="preview-number">01</div>
+                <div class="preview-details">
+                  <strong>Incline Barbell Bench Press</strong>
+                  <span>4 Sets • 8-10 Reps • 80 kg</span>
+                </div>
+                <span class="preview-tag">Primary Compound</span>
+              </div>
+              <div class="preview-item">
+                <div class="preview-number">02</div>
+                <div class="preview-details">
+                  <strong>Cable High-to-Low Flyes</strong>
+                  <span>3 Sets • 12-15 Reps • 25 kg</span>
+                </div>
+                <span class="preview-tag">Hypertrophy</span>
+              </div>
+              <div class="preview-item">
+                <div class="preview-number">03</div>
+                <div class="preview-details">
+                  <strong>Standing Dumbbell Lateral Raises</strong>
+                  <span>4 Sets • 15 Reps • 14 kg</span>
+                </div>
+                <span class="preview-tag">Isolation</span>
+              </div>
+            </div>
+
+            <div class="card-actions-row">
+              <button class="btn btn-primary btn-glow" id="startWorkoutFromDashBtn">
+                <i data-lucide="play"></i>
+                <span>Launch Live Workout Session</span>
+              </button>
+              <button class="btn btn-secondary" id="openAiCustomizerBtn">
+                <i data-lucide="sparkles"></i>
+                <span>AI Customize</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Macro Caloric Ring Widget -->
+          <div class="glass-card macro-summary-card">
+            <div class="card-header-flex">
+              <div>
+                <span class="card-tag">METABOLIC BALANCE</span>
+                <h3>Daily Nutrition Intake</h3>
+              </div>
+              <button class="btn-text" id="goToNutritionTabBtn">Log Meal <i data-lucide="arrow-right"></i></button>
+            </div>
+
+            <div class="macro-ring-container">
+              <svg class="macro-svg" viewBox="0 0 160 160">
+                <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
+                <circle class="ring-carbs" cx="80" cy="80" r="70" stroke-dasharray="440" stroke-dashoffset="180"></circle>
+                <circle class="ring-protein" cx="80" cy="80" r="56" stroke-dasharray="350" stroke-dashoffset="110"></circle>
+                <circle class="ring-fats" cx="80" cy="80" r="42" stroke-dasharray="260" stroke-dashoffset="90"></circle>
+              </svg>
+              <div class="ring-center-content">
+                <span class="ring-cal-val" id="dashCaloriesLogged">1,840</span>
+                <span class="ring-cal-target">/ 2,450 kcal</span>
+                <span class="ring-cal-label">Remaining: 610</span>
+              </div>
+            </div>
+
+            <div class="macro-bars-list">
+              <div class="macro-bar-row">
+                <div class="macro-title-row">
+                  <span class="macro-name text-emerald">Protein (Muscle Synthesis)</span>
+                  <span class="macro-amount"><strong>138g</strong> / 165g</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill emerald-fill" style="width: 83%;"></div></div>
+              </div>
+              <div class="macro-bar-row">
+                <div class="macro-title-row">
+                  <span class="macro-name text-cyan">Carbohydrates (Glycogen)</span>
+                  <span class="macro-amount"><strong>195g</strong> / 245g</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill cyan-fill" style="width: 79%;"></div></div>
+              </div>
+              <div class="macro-bar-row">
+                <div class="macro-title-row">
+                  <span class="macro-name text-purple">Fats (Hormonal Health)</span>
+                  <span class="macro-amount"><strong>52g</strong> / 70g</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill purple-fill" style="width: 74%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Activity & Community Ticker -->
+        <div class="dashboard-bottom-grid">
+          <div class="glass-card streak-card">
+            <h3>Weekly Training Consistency</h3>
+            <div class="days-strip">
+              <div class="day-bubble done"><span class="day-letter">M</span><i data-lucide="check"></i></div>
+              <div class="day-bubble done"><span class="day-letter">T</span><i data-lucide="check"></i></div>
+              <div class="day-bubble done"><span class="day-letter">W</span><i data-lucide="check"></i></div>
+              <div class="day-bubble done"><span class="day-letter">T</span><i data-lucide="check"></i></div>
+              <div class="day-bubble active"><span class="day-letter">F</span><span class="today-dot"></span></div>
+              <div class="day-bubble"><span class="day-letter">S</span></div>
+              <div class="day-bubble"><span class="day-letter">S</span></div>
+            </div>
+            <div class="streak-footer-note">
+              <i data-lucide="zap" class="text-amber"></i>
+              <span>You're on track for your <strong>14-day Gold Tier streak badge</strong>!</span>
+            </div>
+          </div>
+
+          <div class="glass-card live-feed-summary-card">
+            <div class="card-header-flex">
+              <h3>Community Live Activity</h3>
+              <button class="btn-text" id="viewAllFeedBtn">Feed <i data-lucide="chevron-right"></i></button>
+            </div>
+            <div class="feed-mini-list">
+              <div class="mini-feed-item">
+                <span class="feed-user">Elena R.</span>
+                <span class="feed-action">hit new 1RM: Deadlift 160kg</span>
+                <span class="feed-time">12m ago</span>
+              </div>
+              <div class="mini-feed-item">
+                <span class="feed-user">Marcus V.</span>
+                <span class="feed-action">completed 10k Tempo Run</span>
+                <span class="feed-time">45m ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: ACTIVE TRAINER / WORKOUT -->
+      <section class="tab-pane" id="tab-workout">
+        <div class="workout-mode-container">
+          <!-- Active Workout Dashboard & Controls -->
+          <div class="glass-card live-workout-hero">
+            <div class="workout-hero-top">
+              <div class="workout-status-badge">
+                <span class="live-dot pulse"></span>
+                <span id="workoutStatusLabel">ACTIVE SESSION READY</span>
+              </div>
+              <div class="workout-timer-box">
+                <i data-lucide="clock" class="text-cyan"></i>
+                <span class="timer-digits" id="workoutMainTimer">00:00</span>
+              </div>
+            </div>
+
+            <div class="hero-exercise-display">
+              <div class="exercise-badge-row">
+                <span class="tag-muscle" id="currentMuscleTag">Upper Pectorals</span>
+                <span class="tag-order" id="currentExerciseIndex">Exercise 1 of 4</span>
+              </div>
+              <h2 id="currentExerciseName" class="display-exercise-title">Incline Barbell Bench Press</h2>
+              <p id="currentExerciseCoachTip" class="coach-tip-bubble">
+                <i data-lucide="message-square" class="text-emerald"></i>
+                <span id="coachVoiceText">"Set your shoulder blades back and down. Control the descent for 3 seconds, then press with maximum power."</span>
+              </p>
+            </div>
+
+            <!-- Set Logging Table -->
+            <div class="sets-tracker-container">
+              <div class="sets-table-header">
+                <span>SET</span>
+                <span>PREVIOUS</span>
+                <span>KG</span>
+                <span>REPS</span>
+                <span>RPE</span>
+                <span>STATUS</span>
+              </div>
+              <div class="sets-list" id="setsListContainer">
+                <!-- Dynamically injected sets -->
+              </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="workout-controls-bar">
+              <button class="btn btn-emerald btn-lg" id="toggleWorkoutTimerBtn">
+                <i data-lucide="play" id="timerPlayIcon"></i>
+                <span id="timerPlayText">Start Workout</span>
+              </button>
+
+              <button class="btn btn-secondary" id="nextExerciseBtn">
+                <span>Next Exercise</span>
+                <i data-lucide="skip-forward"></i>
+              </button>
+
+              <button class="btn btn-cyan" id="triggerRestTimerBtn">
+                <i data-lucide="timer"></i>
+                <span>Rest Timer (60s)</span>
+              </button>
+
+              <button class="btn btn-outline-danger" id="finishWorkoutBtn">
+                <i data-lucide="check-circle"></i>
+                <span>Complete Workout</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Routine Selector & Muscle Engagement Visualizer -->
+          <div class="workout-side-panel">
+            <div class="glass-card routine-selector-card">
+              <h3>Select Training Program</h3>
+              <div class="routine-tabs" id="routineButtonsList">
+                <button class="routine-btn active" data-routine="push">
+                  <div class="routine-info">
+                    <strong>Hypertrophy Push</strong>
+                    <span>Chest, Shoulders, Triceps • 4 Exercises</span>
+                  </div>
+                  <i data-lucide="chevron-right"></i>
+                </button>
+                <button class="routine-btn" data-routine="pull">
+                  <div class="routine-info">
+                    <strong>Power Pull Alpha</strong>
+                    <span>Lats, Upper Back, Biceps • 4 Exercises</span>
+                  </div>
+                  <i data-lucide="chevron-right"></i>
+                </button>
+                <button class="routine-btn" data-routine="legs">
+                  <div class="routine-info">
+                    <strong>Quadriceps & Posterior</strong>
+                    <span>Squats, RDLs, Calves • 4 Exercises</span>
+                  </div>
+                  <i data-lucide="chevron-right"></i>
+                </button>
+                <button class="routine-btn" data-routine="ai-custom">
+                  <div class="routine-info">
+                    <strong class="text-emerald">✨ AI Custom Split</strong>
+                    <span>Generated for your specific biomechanics</span>
+                  </div>
+                  <i data-lucide="sparkles" class="text-emerald"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Muscle Map Card -->
+            <div class="glass-card muscle-activation-card">
+              <h3>Targeted Muscle Map</h3>
+              <div class="muscle-map-grid">
+                <div class="muscle-item active">
+                  <span class="m-name">Clavicular Pectorals</span>
+                  <div class="m-bar"><div class="m-fill" style="width: 95%;"></div></div>
+                  <span class="m-pct">95% Primary</span>
+                </div>
+                <div class="muscle-item active">
+                  <span class="m-name">Anterior Deltoids</span>
+                  <div class="m-bar"><div class="m-fill" style="width: 78%;"></div></div>
+                  <span class="m-pct">78% Synergy</span>
+                </div>
+                <div class="muscle-item">
+                  <span class="m-name">Triceps Brachii</span>
+                  <div class="m-bar"><div class="m-fill" style="width: 65%;"></div></div>
+                  <span class="m-pct">65% Secondary</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: SMART NUTRITION & MACROS -->
+      <section class="tab-pane" id="tab-nutrition">
+        <div class="nutrition-layout-grid">
+          <!-- Macro Rings & Goal Targets -->
+          <div class="glass-card nutrition-summary-banner">
+            <div class="nutrition-banner-header">
+              <div>
+                <h2>Metabolic & Caloric Target</h2>
+                <p>Personalized calculated TDEE based on 78.5 kg bodyweight and resistance training frequency</p>
+              </div>
+              <div class="cal-badge-pill">
+                <span>Daily Budget:</span>
+                <strong>2,450 kcal</strong>
+              </div>
+            </div>
+
+            <div class="nutrition-rings-grid">
+              <div class="macro-stat-box">
+                <span class="box-label text-emerald">PROTEIN</span>
+                <h3 id="nutProteinVal">138g</h3>
+                <span class="box-sub">Target: 165g (83%)</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill emerald-fill" style="width: 83%;"></div></div>
+              </div>
+              <div class="macro-stat-box">
+                <span class="box-label text-cyan">CARBOHYDRATES</span>
+                <h3 id="nutCarbsVal">195g</h3>
+                <span class="box-sub">Target: 245g (79%)</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill cyan-fill" style="width: 79%;"></div></div>
+              </div>
+              <div class="macro-stat-box">
+                <span class="box-label text-purple">FATS</span>
+                <h3 id="nutFatsVal">52g</h3>
+                <span class="box-sub">Target: 70g (74%)</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill purple-fill" style="width: 74%;"></div></div>
+              </div>
+              <div class="macro-stat-box">
+                <span class="box-label text-amber">WATER HYDRATION</span>
+                <h3 id="nutWaterVal">2.25 L</h3>
+                <span class="box-sub">Target: 3.5 L (64%)</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill amber-fill" style="width: 64%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Meal Section -->
+          <div class="glass-card log-meal-form-card">
+            <h3><i data-lucide="plus-circle" class="text-emerald"></i> Quick Log Food / Meal</h3>
+            <form id="mealLogForm" class="meal-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Meal Category</label>
+                  <select id="mealTypeInput" class="form-control">
+                    <option value="BREAKFAST">Breakfast</option>
+                    <option value="LUNCH">Lunch</option>
+                    <option value="DINNER">Dinner</option>
+                    <option value="SNACK">Snack / Pre-Workout</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Food / Recipe Name</label>
+                  <input type="text" id="mealNameInput" class="form-control" placeholder="e.g. Chicken Breast with Sweet Potato" required />
+                </div>
+              </div>
+
+              <div class="form-row-4">
+                <div class="form-group">
+                  <label>Calories (kcal)</label>
+                  <input type="number" id="mealCaloriesInput" class="form-control" placeholder="450" required />
+                </div>
+                <div class="form-group">
+                  <label>Protein (g)</label>
+                  <input type="number" id="mealProteinInput" class="form-control" placeholder="38" required />
+                </div>
+                <div class="form-group">
+                  <label>Carbs (g)</label>
+                  <input type="number" id="mealCarbsInput" class="form-control" placeholder="45" required />
+                </div>
+                <div class="form-group">
+                  <label>Fats (g)</label>
+                  <input type="number" id="mealFatsInput" class="form-control" placeholder="12" required />
+                </div>
+              </div>
+
+              <div class="quick-preset-chips">
+                <span class="chip-label">Quick Presets:</span>
+                <button type="button" class="preset-chip" data-name="Whey Protein Shake & Banana" data-c="280" data-p="32" data-ch="30" data-f="3">+ Whey Shake</button>
+                <button type="button" class="preset-chip" data-name="Grilled Chicken Salad & Olive Oil" data-c="520" data-p="48" data-ch="18" data-f="22">+ Chicken Salad</button>
+                <button type="button" class="preset-chip" data-name="Oatmeal, Almond Butter & Berries" data-c="420" data-p="16" data-ch="54" data-f="14">+ Oats & Berries</button>
+                <button type="button" class="preset-chip" data-name="Ribeye Steak & Roasted Greens" data-c="680" data-p="52" data-ch="12" data-f="38">+ Ribeye Steak</button>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <i data-lucide="plus"></i>
+                <span>Add Food to Daily Journal</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Daily Meal Log Timeline -->
+          <div class="glass-card meals-timeline-card">
+            <div class="card-header-flex">
+              <h3>Today's Meal Timeline</h3>
+              <span class="badge-tag" id="totalMealsCountBadge">3 Meals Logged</span>
+            </div>
+            <div class="meals-list" id="mealsTimelineList">
+              <!-- Rendered meals -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: AI MICROSERVICE ADVISOR -->
+      <section class="tab-pane" id="tab-ai-coach">
+        <div class="ai-microservice-layout">
+          <!-- AI Engine Configuration -->
+          <div class="glass-card ai-config-card">
+            <div class="ai-card-badge">
+              <i data-lucide="cpu" class="text-emerald"></i>
+              <span>Python 3.11 / FastAPI Inference Engine</span>
+            </div>
+            <h2>Generate Adaptive AI Workout Program</h2>
+            <p>Our microservice computes progressive overload volume, fatigue indexes, and biomechanical stimulus to engineer optimal training programs.</p>
+
+            <form id="aiGenerateForm" class="ai-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Primary Fitness Goal</label>
+                  <select id="aiGoalSelect" class="form-control">
+                    <option value="Muscle Hypertrophy">Muscle Hypertrophy (Muscle Gain)</option>
+                    <option value="Maximum Strength & Power">Maximum Strength & Power</option>
+                    <option value="Metabolic Fat Loss">Metabolic Fat Loss & Conditioning</option>
+                    <option value="Athletic Performance">Athletic Functional Agility</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Athlete Experience Level</label>
+                  <select id="aiLevelSelect" class="form-control">
+                    <option value="Intermediate">Intermediate (1-3 yrs experience)</option>
+                    <option value="Advanced">Advanced (3-6 yrs experience)</option>
+                    <option value="Elite">Elite / Competitor</option>
+                    <option value="Beginner">Beginner (< 1 yr)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Session Duration (Minutes)</label>
+                  <select id="aiDurationSelect" class="form-control">
+                    <option value="45">45 Minutes (Optimal Density)</option>
+                    <option value="30">30 Minutes (Express Blitz)</option>
+                    <option value="60">60 Minutes (Full Volume)</option>
+                    <option value="75">75 Minutes (Powerlifting Wave)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Available Equipment</label>
+                  <select id="aiEquipmentSelect" class="form-control">
+                    <option value="Full Commercial Gym">Full Commercial Gym (Barbells, Cables, Dumbbells)</option>
+                    <option value="Dumbbells & Bench">Dumbbells & Adjustable Bench</option>
+                    <option value="Bodyweight & Pullup Bar">Calisthenics / Bodyweight</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-emerald btn-glow" id="generateAiPlanBtn">
+                <i data-lucide="sparkles"></i>
+                <span>Run AI Microservice Inference</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- AI Generation Result Output -->
+          <div class="glass-card ai-output-card" id="aiOutputCard">
+            <div class="card-header-flex">
+              <div>
+                <span class="card-tag text-cyan">INFERENCE COMPLETED IN 42ms</span>
+                <h3 id="aiGeneratedTitle">AI Adaptive: Hypertrophy Chest & Deltoid Wave</h3>
+              </div>
+              <div class="readiness-pill">Readiness Score: 94%</div>
+            </div>
+
+            <div class="ai-rationale-box">
+              <i data-lucide="brain-circuit" class="text-emerald"></i>
+              <p id="aiRationaleText">"Calculated optimal stimulus-to-fatigue ratio. Selected 4 compound exercises focusing on peak chest tension and lateral deltoid capping."</p>
+            </div>
+
+            <div class="ai-exercises-table-wrap">
+              <table class="ai-table">
+                <thead>
+                  <tr>
+                    <th>EXERCISE</th>
+                    <th>TARGET</th>
+                    <th>SETS</th>
+                    <th>REPS</th>
+                    <th>REST</th>
+                    <th>RPE</th>
+                    <th>BIOMECHANICAL CUE</th>
+                  </tr>
+                </thead>
+                <tbody id="aiPlanTableBody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ai-card-footer">
+              <button class="btn btn-primary" id="loadAiPlanToTrainerBtn">
+                <i data-lucide="upload-cloud"></i>
+                <span>Load Into Live Trainer</span>
+              </button>
+              <button class="btn btn-secondary" id="saveAiPlanJsonBtn">
+                <i data-lucide="download"></i>
+                <span>Export OpenAPI JSON</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: BIOMETRICS & ANALYTICS -->
+      <section class="tab-pane" id="tab-analytics">
+        <div class="analytics-grid-layout">
+          <!-- Canvas Trend Chart -->
+          <div class="glass-card chart-card-large">
+            <div class="card-header-flex">
+              <div>
+                <h3>Body Weight & Strength Progression (30-Day Trend)</h3>
+                <p>Tracking lean body mass vs progressive training volume load</p>
+              </div>
+              <div class="chart-controls">
+                <button class="chart-toggle active" data-metric="weight">Body Weight (kg)</button>
+                <button class="chart-toggle" data-metric="volume">Volume Load (tonnes)</button>
+              </div>
+            </div>
+
+            <div class="canvas-wrapper">
+              <canvas id="progressCanvas" width="800" height="260"></canvas>
+            </div>
+          </div>
+
+          <!-- Biometric Stats Cards -->
+          <div class="biometric-tiles-grid">
+            <div class="glass-card bio-card">
+              <div class="bio-icon emerald"><i data-lucide="heart-pulse"></i></div>
+              <div class="bio-data">
+                <span class="bio-label">Resting Heart Rate</span>
+                <h4>54 bpm</h4>
+                <span class="bio-sub text-emerald">Athletic Zone</span>
+              </div>
+            </div>
+
+            <div class="glass-card bio-card">
+              <div class="bio-icon cyan"><i data-lucide="moon"></i></div>
+              <div class="bio-data">
+                <span class="bio-label">Sleep Duration</span>
+                <h4>8h 12m</h4>
+                <span class="bio-sub text-cyan">92% Sleep Quality</span>
+              </div>
+            </div>
+
+            <div class="glass-card bio-card">
+              <div class="bio-icon purple"><i data-lucide="zap"></i></div>
+              <div class="bio-data">
+                <span class="bio-label">Heart Rate Variability</span>
+                <h4>78 ms</h4>
+                <span class="bio-sub text-purple">High Autonomic Recovery</span>
+              </div>
+            </div>
+
+            <div class="glass-card bio-card">
+              <div class="bio-icon amber"><i data-lucide="trophy"></i></div>
+              <div class="bio-data">
+                <span class="bio-label">Bench 1RM PR</span>
+                <h4>115.0 kg</h4>
+                <span class="bio-sub text-amber">+5kg this month</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Achievements & Badges Showcase -->
+          <div class="glass-card badges-card">
+            <h3>Milestone Achievements & Trophies</h3>
+            <div class="badges-grid">
+              <div class="badge-item unlocked">
+                <div class="badge-icon-box"><i data-lucide="flame"></i></div>
+                <div class="badge-name">14-Day Consistency Master</div>
+                <div class="badge-desc">Trained consecutive weeks without missing a scheduled split.</div>
+              </div>
+              <div class="badge-item unlocked">
+                <div class="badge-icon-box"><i data-lucide="award"></i></div>
+                <div class="badge-name">Century Club</div>
+                <div class="badge-desc">Surpassed 100kg on primary barbell compound lift.</div>
+              </div>
+              <div class="badge-item unlocked">
+                <div class="badge-icon-box"><i data-lucide="droplet"></i></div>
+                <div class="badge-name">Hydration Champion</div>
+                <div class="badge-desc">Met 3.5L daily hydration target for 7 consecutive days.</div>
+              </div>
+              <div class="badge-item locked">
+                <div class="badge-icon-box"><i data-lucide="crown"></i></div>
+                <div class="badge-name">Titan Volume (500 Tonnes)</div>
+                <div class="badge-desc">Accumulate 500,000 kg total training load in 90 days.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: COMMUNITY & SOCIAL FEED -->
+      <section class="tab-pane" id="tab-social">
+        <div class="social-layout-grid">
+          <!-- Feed Column -->
+          <div class="feed-column">
+            <!-- Create Post Card -->
+            <div class="glass-card create-post-card">
+              <div class="create-post-top">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120" class="mini-avatar" alt="Athlete" />
+                <input type="text" id="postContentInput" class="post-input" placeholder="Share workout milestone, PR or nutrition win..." />
+              </div>
+              <div class="create-post-actions">
+                <button class="btn-icon" title="Add Badge"><i data-lucide="award"></i></button>
+                <button class="btn btn-primary btn-sm" id="publishPostBtn">
+                  <i data-lucide="send"></i>
+                  <span>Post to Feed</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Feed Stream -->
+            <div class="feed-stream" id="feedStreamContainer">
+              <!-- Rendered live posts -->
+            </div>
+          </div>
+
+          <!-- Leaderboard Column -->
+          <div class="leaderboard-column">
+            <div class="glass-card leaderboard-card">
+              <div class="card-header-flex">
+                <h3>Weekly Leaderboard</h3>
+                <span class="badge-tag">September League</span>
+              </div>
+
+              <div class="leaderboard-list">
+                <div class="leader-item top-1">
+                  <span class="rank-pos">#1</span>
+                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100" class="mini-avatar" alt="Leader" />
+                  <div class="leader-info">
+                    <strong>Elena Rostova</strong>
+                    <span>94,200 kg Volume • 6 Workouts</span>
+                  </div>
+                  <span class="leader-score">1,450 pts</span>
+                </div>
+
+                <div class="leader-item top-2">
+                  <span class="rank-pos">#2</span>
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="mini-avatar" alt="Leader" />
+                  <div class="leader-info">
+                    <strong>Marcus Vance</strong>
+                    <span>86,400 kg Volume • 5 Workouts</span>
+                  </div>
+                  <span class="leader-score">1,310 pts</span>
+                </div>
+
+                <div class="leader-item top-3 current-user-item">
+                  <span class="rank-pos">#3</span>
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" class="mini-avatar" alt="Leader" />
+                  <div class="leader-info">
+                    <strong>Jordan Sterling (You)</strong>
+                    <span>79,800 kg Volume • 5 Workouts</span>
+                  </div>
+                  <span class="leader-score text-emerald">1,240 pts</span>
+                </div>
+
+                <div class="leader-item">
+                  <span class="rank-pos">#4</span>
+                  <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100" class="mini-avatar" alt="Leader" />
+                  <div class="leader-info">
+                    <strong>Kai Tanaka</strong>
+                    <span>72,100 kg Volume • 4 Workouts</span>
+                  </div>
+                  <span class="leader-score">1,090 pts</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Community Challenge -->
+            <div class="glass-card challenge-card">
+              <div class="challenge-badge">ACTIVE CHALLENGE</div>
+              <h4>100,000 KG Volume Blitz</h4>
+              <p>Accumulate 100 Tonnes of combined resistance load during September to unlock the Obsidian Athlete Badge.</p>
+              <div class="challenge-progress-box">
+                <div class="progress-bar-bg"><div class="progress-bar-fill emerald-fill" style="width: 79%;"></div></div>
+                <div class="challenge-meta">
+                  <span>Progress: 79,800 / 100,000 kg</span>
+                  <strong class="text-emerald">79.8%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: SYSTEM ARCHITECTURE & TECH MATRIX EXPLORER -->
+      <section class="tab-pane" id="tab-architecture">
+        <div class="architecture-explorer-layout">
+          <!-- Architecture Node Diagram -->
+          <div class="glass-card arch-diagram-card">
+            <div class="card-header-flex">
+              <div>
+                <span class="card-tag">FITFLOW HIGH-LEVEL SYSTEM TOPOLOGY</span>
+                <h3>Interactive Micro-Modular Architecture</h3>
+              </div>
+              <div class="arch-status-pill"><span class="live-dot pulse"></span> All Microservices Healthy</div>
+            </div>
+
+            <p class="arch-intro">Click any node below to inspect its operational role, communication protocol, and data flow contracts.</p>
+
+            <div class="interactive-diagram-canvas">
+              <div class="diagram-tier">
+                <div class="tier-label">CLIENT LAYER</div>
+                <div class="arch-node-item active" data-node="flutter">
+                  <div class="node-icon"><i data-lucide="smartphone"></i></div>
+                  <strong>Flutter Mobile & Web</strong>
+                  <span>Dart / CanvasKit / 60 FPS</span>
+                </div>
+              </div>
+
+              <div class="diagram-connector"><i data-lucide="arrow-down"></i> HTTPS / TLS 1.3 & WebSockets</div>
+
+              <div class="diagram-tier">
+                <div class="tier-label">GATEWAY & AUTH</div>
+                <div class="arch-node-item" data-node="nestjs">
+                  <div class="node-icon"><i data-lucide="server"></i></div>
+                  <strong>NestJS API Gateway</strong>
+                  <span>TypeScript / REST & Socket.io</span>
+                </div>
+                <div class="arch-node-item" data-node="supabase">
+                  <div class="node-icon"><i data-lucide="key"></i></div>
+                  <strong>Supabase Auth</strong>
+                  <span>JWT & PostgreSQL RLS</span>
+                </div>
+              </div>
+
+              <div class="diagram-connector"><i data-lucide="arrow-down"></i> gRPC / Internal IPC & Prisma ORM</div>
+
+              <div class="diagram-tier">
+                <div class="tier-label">AI & PERSISTENCE LAYER</div>
+                <div class="arch-node-item" data-node="fastapi">
+                  <div class="node-icon"><i data-lucide="cpu"></i></div>
+                  <strong>Python FastAPI AI</strong>
+                  <span>Recommender & ML Engine</span>
+                </div>
+                <div class="arch-node-item" data-node="postgres">
+                  <div class="node-icon"><i data-lucide="database"></i></div>
+                  <strong>PostgreSQL Database</strong>
+                  <span>Relational Health & JSONB</span>
+                </div>
+                <div class="arch-node-item" data-node="redis">
+                  <div class="node-icon"><i data-lucide="layers"></i></div>
+                  <strong>Redis In-Memory Cache</strong>
+                  <span>Active Sessions & TTL Cache</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Node Inspector Details Box -->
+            <div class="node-inspector-box" id="nodeInspectorBox">
+              <div class="inspector-header">
+                <h4 id="inspectorNodeTitle">Flutter Client (Mobile & Web)</h4>
+                <span class="inspector-protocol" id="inspectorNodeProtocol">Protocol: HTTPS / WSS</span>
+              </div>
+              <p id="inspectorNodeDesc">Universal single-codebase application compiled for Android, iOS, and WebAssembly. Provides high-performance reactive UI, audio coaching synthesizers, and offline-first workout caching.</p>
+            </div>
+          </div>
+
+          <!-- Interactive Weighted Decision Matrix Simulator -->
+          <div class="glass-card matrix-sim-card">
+            <div class="card-header-flex">
+              <div>
+                <span class="card-tag">ACTIVITY 3 SIMULATOR</span>
+                <h3>Interactive Technology Decision Matrix</h3>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="resetWeightsBtn">Reset Default Weights</button>
+            </div>
+
+            <p class="matrix-hint">Adjust criteria weight sliders below to observe real-time recalculation of weighted scores across frameworks:</p>
+
+            <div class="weight-sliders-row">
+              <div class="slider-group">
+                <div class="slider-label-row">
+                  <span>Performance (60 FPS)</span>
+                  <strong id="wPerfDisplay">20%</strong>
+                </div>
+                <input type="range" id="sliderPerf" min="5" max="50" value="20" class="matrix-slider" />
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-label-row">
+                  <span>Cross-Platform Parity</span>
+                  <strong id="wCrossDisplay">20%</strong>
+                </div>
+                <input type="range" id="sliderCross" min="5" max="50" value="20" class="matrix-slider" />
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-label-row">
+                  <span>Dev Velocity & Reusability</span>
+                  <strong id="wVelDisplay">30%</strong>
+                </div>
+                <input type="range" id="sliderVel" min="5" max="50" value="30" class="matrix-slider" />
+              </div>
+
+              <div class="slider-group">
+                <div class="slider-label-row">
+                  <span>Maintainability & Ecosystem</span>
+                  <strong id="wMaintDisplay">30%</strong>
+                </div>
+                <input type="range" id="sliderMaint" min="5" max="50" value="30" class="matrix-slider" />
+              </div>
+            </div>
+
+            <!-- Calculated Score Bars -->
+            <div class="matrix-scores-results">
+              <div class="score-result-item winner">
+                <div class="score-meta">
+                  <strong>Flutter (Dart)</strong>
+                  <span class="score-badge text-emerald" id="flutterScoreText">4.85 / 5.0</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill emerald-fill" id="flutterScoreBar" style="width: 97%;"></div></div>
+                <span class="score-verdict">Selected Standard: Highest balance of performance & cross-platform consistency.</span>
+              </div>
+
+              <div class="score-result-item">
+                <div class="score-meta">
+                  <strong>React Native (TypeScript)</strong>
+                  <span class="score-badge" id="rnScoreText">4.30 / 5.0</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill cyan-fill" id="rnScoreBar" style="width: 86%;"></div></div>
+              </div>
+
+              <div class="score-result-item">
+                <div class="score-meta">
+                  <strong>Kotlin Multiplatform (KMP)</strong>
+                  <span class="score-badge" id="kmpScoreText">3.82 / 5.0</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill purple-fill" id="kmpScoreBar" style="width: 76%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 8: CUSTOM PROFILE & ATHLETE SETTINGS -->
+      <section class="tab-pane" id="tab-settings">
+        <div class="glass-card settings-card">
+          <h2>Personalize Your Athlete Profile</h2>
+          <p>Update your fitness goals, biometric targets, and coaching preferences. All changes update the AI algorithms in real time.</p>
+
+          <form id="profileSettingsForm" class="settings-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Athlete Name</label>
+                <input type="text" id="settingNameInput" class="form-control" value="Jordan Sterling" required />
+              </div>
+              <div class="form-group">
+                <label>Primary Training Goal</label>
+                <select id="settingGoalInput" class="form-control">
+                  <option value="Hypertrophy Pro">Hypertrophy (Lean Muscle Gain)</option>
+                  <option value="Strength Powerlifter">Strength & Powerlifting</option>
+                  <option value="Metabolic Conditioning">Metabolic Fat Loss & Conditioning</option>
+                  <option value="Endurance Athlete">Endurance & Marathon</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Current Weight (kg)</label>
+                <input type="number" step="0.1" id="settingWeightInput" class="form-control" value="78.5" required />
+              </div>
+              <div class="form-group">
+                <label>Target Weight (kg)</label>
+                <input type="number" step="0.1" id="settingTargetWeightInput" class="form-control" value="75.0" required />
+              </div>
+              <div class="form-group">
+                <label>Height (cm)</label>
+                <input type="number" id="settingHeightInput" class="form-control" value="182" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Daily Calorie Target (kcal)</label>
+                <input type="number" id="settingCaloriesInput" class="form-control" value="2450" required />
+              </div>
+              <div class="form-group">
+                <label>Daily Water Goal (Liters)</label>
+                <input type="number" step="0.1" id="settingWaterInput" class="form-control" value="3.5" required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i data-lucide="save"></i>
+              <span>Save & Update Fitness Profile</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Audio Coach Rest Modal -->
+  <div class="rest-modal-backdrop" id="restModal">
+    <div class="rest-modal-card">
+      <div class="rest-modal-icon"><i data-lucide="timer" class="text-cyan"></i></div>
+      <h3>Rest Interval</h3>
+      <div class="rest-countdown" id="restCountdownNumber">60</div>
+      <p>Breathe deeply and hydrate. Voice coach will signal when the next set begins.</p>
+      <button class="btn btn-primary" id="skipRestBtn">Skip Rest & Continue</button>
+    </div>
+  </div>
+
+  <!-- Workout Finished Celebration Modal -->
+  <div class="rest-modal-backdrop" id="finishModal">
+    <div class="rest-modal-card celebration-card">
+      <div class="rest-modal-icon emerald"><i data-lucide="award" class="text-emerald"></i></div>
+      <h2>Workout Completed! 🔥</h2>
+      <p class="summary-text" id="finishSummaryText">You burned 460 kcal with 14,200 kg total volume moved.</p>
+      <div class="celebration-badge-row">
+        <span class="badge-tag">🔥 14-Day Streak Maintained</span>
+        <span class="badge-tag">⚡ Recovery: 94%</span>
+      </div>
+      <button class="btn btn-emerald btn-lg" id="closeFinishModalBtn">Awesome! Return to Dashboard</button>
+    </div>
+  </div>
+
+  <!-- Main Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
